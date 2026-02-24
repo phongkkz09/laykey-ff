@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF KEY SYSTEM | PHONGKKZ09</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #00f2fe; --secondary: #4facfe; --bg: #0b0e14; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
+        .card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 40px; width: 90%; max-width: 450px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .logo { font-size: 50px; color: var(--primary); margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--primary)); }
+        .key-display { background: #000; padding: 15px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 1.2rem; color: #00ff88; border: 1px solid var(--primary); margin: 20px 0; position: relative; overflow: hidden; }
+        .progress-bar { height: 4px; background: var(--primary); width: 100%; position: absolute; bottom: 0; left: 0; transition: width 1s linear; }
+        .btn-copy { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; padding: 12px 30px; border-radius: 50px; color: #000; font-weight: bold; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn-copy:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <i class="fa-solid fa-shield-halved logo"></i>
+        <h2>HỆ THỐNG XÁC THỰC ⚔️</h2>
+        <p style="color: #aaa; font-size: 0.9rem;">Vui lòng sao chép Key bên dưới và quay lại Bot</p>
+        
+        <div class="key-display" id="keyBox">
+            <span id="keyCode">Đang xác thực...</span>
+            <div class="progress-bar" id="prog"></div>
+        </div>
+
+        <button class="btn-copy" onclick="copyKey()"><i class="fa-solid fa-copy"></i> SAO CHÉP KEY</button>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.5;">Owner: @ngthphgg | KOTE Clan</p>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const key = params.get('key');
+        const keyCode = document.getElementById('keyCode');
+        
+        if (key) {
+            keyCode.innerText = key;
+            // Hiệu ứng thanh tiến trình 60 giây
+            let width = 100;
+            const interval = setInterval(() => {
+                width -= 1.66;
+                document.getElementById('prog').style.width = width + "%";
+                if (width <= 0) {
+                    clearInterval(interval);
+                    keyCode.innerText = "KEY ĐÃ HẾT HẠN";
+                    keyCode.style.color = "#ff4d4d";
+                }
+            }, 1000);
+        }
+
+        function copyKey() {
+            if (keyCode.innerText.includes("HẾT HẠN")) return alert("Key đã hết hạn!");
+            navigator.clipboard.writeText(keyCode.innerText);
+            alert("✅ Đã sao chép! Hãy quay lại Bot nhập: /key " + keyCode.innerText);
+        }
+    </script>
+</body>
+</html>
